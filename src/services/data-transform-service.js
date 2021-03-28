@@ -93,7 +93,7 @@ export const transformSenateResults = async (senateRaces, setCurrState) => {
     if (race.type === 'regular') {
       output[states[race.state]] = {
         fill: color,
-        clickHandler: () => setCurrState(states[race.state]),
+        clickHandler: (event) => setCurrState(states[race.state]),
         winnerPct,
         secondPct,
         winnerParty,
@@ -104,7 +104,7 @@ export const transformSenateResults = async (senateRaces, setCurrState) => {
     } else {
       output[`${states[race.state]}-special`] = {
         fill: color,
-        clickHandler: () => setCurrState(states[race.state]),
+        clickHandler: (event) => setCurrState(states[race.state]),
         winnerPct,
         secondPct,
         winnerParty,

@@ -3,6 +3,7 @@ import CurrentSenators from './components/current-senators';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Home from './components/home';
 import SenateElection from './components/senate-election';
+import MarginOfVictory from './components/margin-of-victory';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         <Route exact={true}
                path={['/elections']}
                component={SenateElection}/>
+        <Route exact={true}
+               path={['/margin-of-victory']}
+               component={MarginOfVictory}/>
       </BrowserRouter>
     </div>
   );
