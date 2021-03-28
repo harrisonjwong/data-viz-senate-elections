@@ -35,7 +35,7 @@ const CurrentSenators = () => {
             <div className='p-1' style={{color: 'white', backgroundColor: 'red'}}>Two Republican Senators</div>
             <div className='p-1' style={{color: 'white', backgroundColor: 'blue'}}>Two Democratic Senators</div>
             <div className='p-1' style={{color: 'white', backgroundColor: 'purple'}}>One Republican Senator and one Democratic Senator</div>
-            <div style={{fontStyle: 'italic', fontSize: 'small'}}>Note: Angus King (I-ME) and Bernie Sanders(I-VT) are independents caucusing with the Democrats.</div>
+            <div style={{fontStyle: 'italic', fontSize: 'small'}}>Note: Angus King (I-ME) and Bernie Sanders (I-VT) are independents caucusing with the Democrats.</div>
           </div>
           {
             currState &&
