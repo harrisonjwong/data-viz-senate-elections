@@ -31,3 +31,4 @@ Wikipedia for election results:
 * [2012](https://en.wikipedia.org/wiki/2012_United_States_Senate_elections)
 * [2010](https://en.wikipedia.org/wiki/2010_United_States_Senate_elections)
 
+`\[[0-9]+\]`

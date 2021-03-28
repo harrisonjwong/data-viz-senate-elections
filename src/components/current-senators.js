@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-// import MapChart from './map-chart';
 import USAMap from 'react-usa-map';
-import currentService from '../services/current-congress';
+import currentService from '../services/data-service';
 import {transformToStateConfig} from '../services/data-transform-service';
+import {Link} from 'react-router-dom';
 
-const Map = () => {
+const CurrentSenators = () => {
   const mapHandler = (event) => {
-    alert(event.target.dataset.name)
+    console.log(event.target.dataset.name)
   }
   const [senators, setSenators] = useState({});
   const [currState, setCurrState] = useState('');
@@ -19,12 +19,24 @@ const Map = () => {
 
   return (
     <div>
-      <h1>Map</h1>
+      <div className='row'>
+        <div className='col-1'>
+          <Link className='mt-1 btn btn-block btn-secondary' to='/'>Back</Link>
+        </div>
+        <h1 className='col-11'>Current Senators</h1>
+      </div>
       <div className='row'>
         <div className='col-8'>
           <USAMap customize={senators} onClick={mapHandler}/>
         </div>
         <div className='col-4'>
+          <h5>Key</h5>
+          <div>
+            <div className='p-1' style={{color: 'white', backgroundColor: 'red'}}>Two Republican Senators</div>
+            <div className='p-1' style={{color: 'white', backgroundColor: 'blue'}}>Two Democratic Senators</div>
+            <div className='p-1' style={{color: 'white', backgroundColor: 'purple'}}>One Republican Senator and one Democratic Senator</div>
+            <div style={{fontStyle: 'italic', fontSize: 'small'}}>Note: Angus King (I-ME) and Bernie Sanders(I-VT) are independents caucusing with the Democrats.</div>
+          </div>
           {
             currState &&
             <div>
@@ -43,4 +55,4 @@ const Map = () => {
   );
 }
 
-export default Map;
+export default CurrentSenators;
