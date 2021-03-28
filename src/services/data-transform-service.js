@@ -113,7 +113,40 @@ export const transformSenateResults = async (senateRaces, setCurrState) => {
         secondName
       };
     }
-
   });
   return output;
+}
+
+export const transformColorsToMarginOfVictory = (parsedSenateResults) => {
+  const returnValues = {}
+  Object.entries(parsedSenateResults).forEach(race => {
+    const stateAbb = race[0];
+    const result = race[1];
+
+    // Hue: Hue 0 = red, Hue ~236 = blue
+    // Saturation, keep at 100% for simplicity
+    // Lightness: 0% = black, 100% = white;
+    // -> go from 96 (small victory) to 26 (large victory)
+    let hue;
+    let light;
+    if (result.winnerParty === 'Democratic' || result.winnerParty === 'Independent') {
+      let marginOfVictory = result.winnerPct - result.secondPct;
+      if (marginOfVictory >= 35) {
+        marginOfVictory = 35;
+      }
+      hue = 236;
+      light = 96 - (2 * marginOfVictory);
+    } else if (result.winnerParty === 'Republican') {
+      let marginOfVictory = result.winnerPct - result.secondPct;
+      if (marginOfVictory >= 35) {
+        marginOfVictory = 35;
+      }
+      hue = 0;
+      light = 96 - (2 * marginOfVictory);
+    }
+    result.fill = `hsl(${hue}, 100%, ${light}%)`;
+    returnValues[stateAbb] = result;
+  })
+  return returnValues;
+
 }

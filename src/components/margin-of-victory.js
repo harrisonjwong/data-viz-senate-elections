@@ -1,32 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import {getSenateElection} from '../services/data-service';
-import {transformSenateResults} from '../services/data-transform-service';
-import USAMap from 'react-usa-map';
+import {transformColorsToMarginOfVictory, transformSenateResults} from '../services/data-transform-service';
 import {Link} from 'react-router-dom';
+import USAMap from 'react-usa-map';
 import YearPicker from './helpers/year-picker';
-import RaceResultTable from './helpers/race-result-table';
 import SpecialElectionsTable from './helpers/special-elections-table';
+import RaceResultTable from './helpers/race-result-table';
 
-const SenateElection = () => {
+const MarginOfVictory = () => {
   const mapHandler = (event) => {
     setCurrState(event.target.dataset.name)
   }
   const [results, setResults] = useState({});
   const [currState, setCurrState] = useState('');
   const [year, setYear] = useState(2020);
+
   useEffect(() => {
     getSenateElection(year).then(async res => {
       const transformed = await transformSenateResults(res, setCurrState);
-      setResults(transformed)
+      setResults(transformColorsToMarginOfVictory(transformed))
     });
-  }, [year]);
+  }, [year])
+
+  const getHslRange = () => {
+    const result = [];
+    for (let i = 70; i >= 0; i--) {
+      result.push(`hsl(${236}, 100%, ${96 - i}%`);
+    }
+    for (let i = 0; i < 70; i++) {
+      result.push(`hsl(${0}, 100%, ${96 - i}%)`);
+    }
+    return result;
+  }
+
   return (
     <div>
       <div className='row'>
         <div className='col-1'>
           <Link className='mt-1 btn btn-block btn-secondary' to='/'>Back</Link>
         </div>
-        <h1 className='col-11'>{year} U.S. Senate Elections</h1>
+        <h1 className='col-11'>{year} U.S. Senate Elections - Margin of Victory</h1>
       </div>
       <div className='row'>
         <div className='col-8'>
@@ -36,15 +49,31 @@ const SenateElection = () => {
         <div className='col-4'>
           <YearPicker setYear={setYear}/>
           <h5>Key</h5>
-          <div className='p-1' style={{color: 'white', backgroundColor: 'firebrick'}}>Republican gain</div>
-          <div className='p-1' style={{color: 'white', backgroundColor: 'royalblue'}}>Democratic gain</div>
-          <div className='p-1' style={{color: 'white', backgroundColor: 'lightcoral'}}>Republican hold</div>
-          <div className='p-1' style={{color: 'white', backgroundColor: 'lightskyblue'}}>Democratic hold</div>
+          <div>
+            <table>
+              <tbody>
+              <tr>
+                {
+                  getHslRange().map(color => {
+                    return <td width='7px' height='20px' style={{backgroundColor: color, padding: 0}}/>
+                  })
+                }
+              </tr>
+              </tbody>
+            </table>
+            <div>
+              Larger Democratic Victory
+              <div className='float-right'>
+                Larger Republican Victory
+              </div>
+            </div>
+          </div>
+          <br/>
           {
             currState &&
             <div>
               <h1>{currState}</h1>
-              {!results[currState] && <h5>No regularly scheduled senate election</h5>}
+              {!results[currState] && <h5>No regularly scheduled Senate election</h5>}
               {
                 results[currState] &&
                 <RaceResultTable currState={currState} results={results}/>
@@ -54,7 +83,8 @@ const SenateElection = () => {
         </div>
       </div>
     </div>
-  )
+
+  );
 }
 
-export default SenateElection;
+export default MarginOfVictory;
