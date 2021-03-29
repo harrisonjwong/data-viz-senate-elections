@@ -15,6 +15,7 @@ Language: JavaScript
 
 Packages:
 
+* React
 * Bootstrap (for basic styling)
 * [react-usa-map](https://www.npmjs.com/package/react-usa-map) (provides the US map)
 
