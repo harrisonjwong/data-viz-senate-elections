@@ -7,7 +7,7 @@ import YearPicker from './helpers/year-picker';
 import RaceResultTable from './helpers/race-result-table';
 import SpecialElectionsTable from './helpers/special-elections-table';
 
-const SenateElection = () => {
+const SenateElection = ({states}) => {
   const mapHandler = (event) => {
     setCurrState(event.target.dataset.name)
   }
@@ -16,10 +16,10 @@ const SenateElection = () => {
   const [year, setYear] = useState(2020);
   useEffect(() => {
     getSenateElection(year).then(async res => {
-      const transformed = await transformSenateResults(res, setCurrState);
+      const transformed = await transformSenateResults(res, setCurrState, states);
       setResults(transformed)
     });
-  }, [year]);
+  }, [year, states]);
   return (
     <div>
       <div className='row'>
@@ -43,7 +43,7 @@ const SenateElection = () => {
           {
             currState &&
             <div>
-              <h1>{currState}</h1>
+              <h1>{states[currState] || states[currState.substring(0, 2)] + ' special'}</h1>
               {!results[currState] && <h5>No regularly scheduled senate election</h5>}
               {
                 results[currState] &&

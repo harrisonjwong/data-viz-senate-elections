@@ -10,8 +10,6 @@ export const getStates = () =>
   fetch(`data/states.json`)
     .then(response => response.json());
 
-const api = {
-  getCurrentLegislators
-}
-
-export default api;
+export const getPresidentialElection = (year) =>
+  fetch(`data/${year}-presidential.json`)
+    .then(response => response.json());

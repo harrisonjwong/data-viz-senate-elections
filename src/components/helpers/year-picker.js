@@ -3,7 +3,7 @@ import React from 'react';
 const YearPicker = ({setYear}) => {
   return (
     <div>
-      <h5>Select a year</h5>
+      <h5>Select Senate elections</h5>
       <select className='form-control' onChange={e => setYear(e.target.value)}>
         <option value={2020}>2020 (Class 2)</option>
         <option value={2018}>2018 (Class 1)</option>

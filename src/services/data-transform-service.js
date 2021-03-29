@@ -1,4 +1,4 @@
-import {getStates} from './data-service';
+import {getPresidentialElection} from './data-service';
 
 export const transformToStateConfig = (members, setCurrState) => {
   const allSenatorsFullObjects = members.filter(member => {
@@ -59,15 +59,14 @@ export const transformToStateConfig = (members, setCurrState) => {
   return mapStateConfig;
 }
 
-export const transformSenateResults = async (senateRaces, setCurrState) => {
+export const transformSenateResults = (senateRaces, setCurrState, states) => {
   const demHold = 'lightskyblue';
   const demGain = 'royalblue';
   const repHold = 'lightcoral';
   const repGain = 'firebrick';
-  const states = await getStates();
   const output = {};
   senateRaces.forEach(race => {
-    const splitResults = race.results.split("\n");
+    const splitResults = race.results.split('\n');
     const winner = splitResults[0].split(' ');
     const second = splitResults[1].split(' ');
     const winnerPct = parseFloat(winner[winner.length - 1]);
@@ -149,4 +148,94 @@ export const transformColorsToMarginOfVictory = (parsedSenateResults) => {
   })
   return returnValues;
 
+}
+
+export const transformColorsToPresidentialComparison =
+  async (parsedSenateResults, presidentialYear, setPresidentialResults, states) => {
+    const returnValues = {};
+    const presidentialResults = await getPresidentialElection(presidentialYear);
+    setPresidentialResults(parsePresidentialResultsToSenateFormat(presidentialResults, states, presidentialYear));
+    Object.entries(parsedSenateResults).forEach(race => {
+      const originalStateAbb = race[0];
+      const stateAbb = originalStateAbb.includes('-special') ? originalStateAbb.substring(0, 2) : originalStateAbb;
+      const stateFull = states[stateAbb];
+      const result = race[1];
+      let marginOfVictory;
+      if (result.winnerParty === 'Democratic' || result.winnerParty === 'Independent') {
+        marginOfVictory = result.winnerPct - result.secondPct;
+      } else if (result.winnerParty === 'Republican') {
+        marginOfVictory = (result.winnerPct - result.secondPct) * -1;
+      }
+      //fix for crash on hard reload?
+      const presidential = presidentialResults.find(obj => obj.state === stateFull) || {};
+      const presidentialMargin = (presidential.demPct * 100) - (presidential.repPct * 100);
+      let senatePresDiff = marginOfVictory - presidentialMargin;
+      if (senatePresDiff >= 35) {
+        senatePresDiff = 35
+      }
+      if (senatePresDiff <= -35) {
+        senatePresDiff = -35;
+      }
+      let hue;
+      let light;
+      if (senatePresDiff >= 0) {
+        hue = 236;
+        light = 96 - (2 * senatePresDiff);
+      } else {
+        hue = 0;
+        light = 96 - (2 * (senatePresDiff * -1));
+      }
+      result.fill = `hsl(${hue}, 100%, ${light}%)`
+      returnValues[originalStateAbb] = result;
+    });
+    return returnValues;
+  }
+
+export const parsePresidentialResultsToSenateFormat = (presidentialResults, states, presidentialYear) => {
+  let demCandidate;
+  let repCandidate;
+  if (presidentialYear === '2020') {
+    demCandidate = 'Joe Biden';
+    repCandidate = 'Donald Trump';
+  } else if (presidentialYear === '2016') {
+    demCandidate = 'Hillary Clinton';
+    repCandidate = 'Donald Trump';
+  } else if (presidentialYear === '2012') {
+    demCandidate = 'Barack Obama';
+    repCandidate = 'Mitt Romney';
+  }
+  //winnerName, winnerParty, winnerPct, secondName, secondParty, secondPct
+  const returnValues = {};
+  presidentialResults.forEach(result => {
+    const currState = {}
+    const stateAbb = states && states[result.state];
+    if (result.demPct > result.repPct) {
+      currState.winnerName = demCandidate;
+      currState.winnerParty = 'Democratic';
+      currState.winnerPct = result.demPct * 100;
+      currState.secondName = repCandidate;
+      currState.secondParty = 'Republican';
+      currState.secondPct = result.repPct * 100;
+    } else {
+      currState.secondName = demCandidate;
+      currState.secondParty = 'Democratic';
+      currState.secondPct = result.demPct * 100;
+      currState.winnerName = repCandidate;
+      currState.winnerParty = 'Republican';
+      currState.winnerPct = result.repPct * 100;
+    }
+    returnValues[stateAbb] = currState;
+  });
+  return returnValues;
+}
+
+export const getHslRange = () => {
+  const result = [];
+  for (let i = 70; i >= 0; i--) {
+    result.push(`hsl(${236}, 100%, ${96 - i}%`);
+  }
+  for (let i = 0; i < 70; i++) {
+    result.push(`hsl(${0}, 100%, ${96 - i}%)`);
+  }
+  return result;
 }

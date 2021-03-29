@@ -2,7 +2,7 @@ import React from 'react';
 
 const RaceResultTable = ({results, currState}) => {
   return (
-    <table className='table'>
+    <table className='table table-sm'>
       <thead>
       <tr>
         <th>Party</th>
@@ -14,25 +14,25 @@ const RaceResultTable = ({results, currState}) => {
       <tr>
         <td>{results[currState].winnerParty}</td>
         <td>{results[currState].winnerName}</td>
-        <td>{results[currState].winnerPct}</td>
+        <td>{Number.parseFloat(results[currState].winnerPct).toFixed(2)}</td>
       </tr>
       <tr>
         <td>{results[currState].secondParty}</td>
         <td>{results[currState].secondName}</td>
-        <td>{results[currState].secondPct}</td>
+        <td>{Number.parseFloat(results[currState].secondPct).toFixed(2)}</td>
       </tr>
       {
-        results[currState].winnerPct + results[currState].secondPct < 100 &&
+        false && results[currState].winnerPct + results[currState].secondPct < 100 &&
         <tr>
           <td>Other</td>
           <td>---</td>
-          <td>{Number.parseFloat(100 - results[currState].winnerPct - results[currState].secondPct).toFixed(1)}</td>
+          <td>{Number.parseFloat(100 - results[currState].winnerPct - results[currState].secondPct).toFixed(2)}</td>
         </tr>
       }
       <tr>
         <th>Margin</th>
         <th>{results[currState].winnerParty}</th>
-        <th>+{Number.parseFloat(results[currState].winnerPct - results[currState].secondPct).toFixed(1)}</th>
+        <th>+{Number.parseFloat(results[currState].winnerPct - results[currState].secondPct).toFixed(2)}</th>
       </tr>
       </tbody>
     </table>

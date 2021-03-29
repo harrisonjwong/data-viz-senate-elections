@@ -15,6 +15,9 @@ const Home = () => {
         <li className='list-group-item' key='margin'>
           <Link to='/margin-of-victory'>Margin of Victory</Link>
         </li>
+        <li className='list-group-item' key='presidential'>
+          <Link to='/senate-to-presidential'>Senate vs. Presidential Margin </Link>
+        </li>
       </ul>
     </div>
   );

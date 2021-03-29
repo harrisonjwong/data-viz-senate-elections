@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {getSenateElection} from '../services/data-service';
 import {
   getHslRange,
-  transformColorsToMarginOfVictory,
+  transformColorsToPresidentialComparison,
   transformSenateResults
 } from '../services/data-transform-service';
 import {Link} from 'react-router-dom';
@@ -11,20 +11,24 @@ import YearPicker from './helpers/year-picker';
 import SpecialElectionsTable from './helpers/special-elections-table';
 import RaceResultTable from './helpers/race-result-table';
 
-const MarginOfVictory = ({states}) => {
+const SenateToPresidential = ({states}) => {
   const mapHandler = (event) => {
     setCurrState(event.target.dataset.name)
   }
   const [results, setResults] = useState({});
   const [currState, setCurrState] = useState('');
   const [year, setYear] = useState(2020);
+  const [presidentialYear, setPresidentialYear] = useState('2020');
+  const [presidentialResults, setPresidentialResults] = useState({});
 
   useEffect(() => {
     getSenateElection(year).then(async res => {
       const transformed = await transformSenateResults(res, setCurrState, states);
-      setResults(transformColorsToMarginOfVictory(transformed))
+      const comparison = await transformColorsToPresidentialComparison(
+        transformed, presidentialYear, setPresidentialResults, states);
+      setResults(comparison)
     });
-  }, [year, states])
+  }, [year, presidentialYear, states])
 
   return (
     <div>
@@ -32,7 +36,7 @@ const MarginOfVictory = ({states}) => {
         <div className='col-1'>
           <Link className='mt-1 btn btn-block btn-secondary' to='/'>Back</Link>
         </div>
-        <h1 className='col-11'>{year} U.S. Senate Elections Margin of Victory</h1>
+        <h1 className='col-11'>{year} Senate Elections vs. {presidentialYear} Presidential</h1>
       </div>
       <div className='row'>
         <div className='col-8'>
@@ -41,6 +45,14 @@ const MarginOfVictory = ({states}) => {
         </div>
         <div className='col-4'>
           <YearPicker setYear={setYear}/>
+          <div>
+            <h5>Select Presidential Year to Compare</h5>
+            <select className='form-control' onChange={e => setPresidentialYear(e.target.value)}>
+              <option value={2020}>2020 (Biden vs. Trump)</option>
+              <option value={2016}>2016 (Clinton vs. Trump)</option>
+              <option value={2012}>2012 (Obama vs. Romney)</option>
+            </select>
+          </div>
           <h5>Key</h5>
           <div>
             <table>
@@ -55,14 +67,13 @@ const MarginOfVictory = ({states}) => {
               </tr>
               </tbody>
             </table>
-            <div>
-              Larger Democratic Victory
+            <div style={{fontSize: 'small'}}>
+              More Democratic than Presidential
               <div className='float-right'>
-                Larger Republican Victory
+                More Republican than Presidential
               </div>
             </div>
           </div>
-          <br/>
           {
             currState &&
             <div>
@@ -70,7 +81,12 @@ const MarginOfVictory = ({states}) => {
               {!results[currState] && <h5>No regularly scheduled Senate election</h5>}
               {
                 results[currState] &&
-                <RaceResultTable currState={currState} results={results}/>
+                <div>
+                  <h5>Senate Race</h5>
+                  <RaceResultTable currState={currState} results={results}/>
+                  <h5>Presidential Race</h5>
+                  <RaceResultTable currState={currState.includes('-special') ? currState.substring(0, 2) : currState} results={presidentialResults}/>
+                </div>
               }
             </div>
           }
@@ -81,4 +97,4 @@ const MarginOfVictory = ({states}) => {
   );
 }
 
-export default MarginOfVictory;
+export default SenateToPresidential;

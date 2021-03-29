@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import USAMap from 'react-usa-map';
-import currentService from '../services/data-service';
+import {getCurrentLegislators} from '../services/data-service';
 import {transformToStateConfig} from '../services/data-transform-service';
 import {Link} from 'react-router-dom';
 
-const CurrentSenators = () => {
+const CurrentSenators = ({states}) => {
   const mapHandler = (event) => {
     console.log(event.target.dataset.name)
   }
   const [senators, setSenators] = useState({});
   const [currState, setCurrState] = useState('');
   useEffect(() => {
-    currentService.getCurrentLegislators()
+    getCurrentLegislators()
       .then(members => {
         setSenators(transformToStateConfig(members, setCurrState));
       })
@@ -40,7 +40,7 @@ const CurrentSenators = () => {
           {
             currState &&
             <div>
-              <h2>{currState}</h2>
+              <h2>{states[currState]}</h2>
               <h4>Senior Senator</h4>
               {senators[currState]['seniorSenator']['name']}
               {senators[currState]['seniorSenator']['party'] === 'Democrat' ? ' (D)' : ' (R)'}
