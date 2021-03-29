@@ -46,7 +46,7 @@ const SenateToPresidential = ({states}) => {
         <div className='col-4'>
           <YearPicker setYear={setYear}/>
           <div>
-            <h5>Select Presidential Year to Compare</h5>
+            <h5>Select Presidential Year to compare</h5>
             <select className='form-control' onChange={e => setPresidentialYear(e.target.value)}>
               <option value={2020}>2020 (Biden vs. Trump)</option>
               <option value={2016}>2016 (Clinton vs. Trump)</option>

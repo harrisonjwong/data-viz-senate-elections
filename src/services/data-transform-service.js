@@ -163,6 +163,10 @@ export const transformColorsToPresidentialComparison =
       let marginOfVictory;
       if (result.winnerParty === 'Democratic' || result.winnerParty === 'Independent') {
         marginOfVictory = result.winnerPct - result.secondPct;
+        // California exception
+        if (result.winnerParty === 'Democratic' && result.secondParty === 'Democratic') {
+          marginOfVictory = 40;
+        }
       } else if (result.winnerParty === 'Republican') {
         marginOfVictory = (result.winnerPct - result.secondPct) * -1;
       }
@@ -170,11 +174,11 @@ export const transformColorsToPresidentialComparison =
       const presidential = presidentialResults.find(obj => obj.state === stateFull) || {};
       const presidentialMargin = (presidential.demPct * 100) - (presidential.repPct * 100);
       let senatePresDiff = marginOfVictory - presidentialMargin;
-      if (senatePresDiff >= 35) {
-        senatePresDiff = 35
+      if (senatePresDiff >= 40) {
+        senatePresDiff = 40
       }
-      if (senatePresDiff <= -35) {
-        senatePresDiff = -35;
+      if (senatePresDiff <= -40) {
+        senatePresDiff = -40;
       }
       let hue;
       let light;

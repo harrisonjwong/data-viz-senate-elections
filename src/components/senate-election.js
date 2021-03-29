@@ -26,7 +26,7 @@ const SenateElection = ({states}) => {
         <div className='col-1'>
           <Link className='mt-1 btn btn-block btn-secondary' to='/'>Back</Link>
         </div>
-        <h1 className='col-11'>{year} U.S. Senate Elections</h1>
+        <h1 className='col-11'>{year} Senate Elections</h1>
       </div>
       <div className='row'>
         <div className='col-8'>

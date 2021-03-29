@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 const Home = () => {
   return (
     <div>
-      <h1>Senate Data Visualization</h1>
+      <h1>U.S. Senate Data Visualization</h1>
       <ul className='list-group'>
         <li className='list-group-item' key='current'>
           <Link to='/current-senators'>Current Senators</Link>
