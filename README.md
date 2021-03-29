@@ -22,7 +22,7 @@ Packages:
 
 https://theunitedstates.io/ for the current members of Congress
 
-Wikipedia for election results:
+Wikipedia for Senate election results:
 
 * [2020](https://en.wikipedia.org/wiki/2020_United_States_Senate_elections)
 * [2018](https://en.wikipedia.org/wiki/2018_United_States_Senate_elections)
@@ -30,5 +30,11 @@ Wikipedia for election results:
 * [2014](https://en.wikipedia.org/wiki/2014_United_States_Senate_elections)
 * [2012](https://en.wikipedia.org/wiki/2012_United_States_Senate_elections)
 * [2010](https://en.wikipedia.org/wiki/2010_United_States_Senate_elections)
+
+Wikipedia for Presidential election results:
+
+* [2020](https://en.wikipedia.org/wiki/2020_United_States_presidential_election)
+* [2016](https://en.wikipedia.org/wiki/2016_United_States_presidential_election)
+* [2012](https://en.wikipedia.org/wiki/2012_United_States_presidential_election)
 
 `\[[0-9]+\]`
