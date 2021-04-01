@@ -165,7 +165,7 @@ export const transformColorsToPresidentialComparison =
         marginOfVictory = result.winnerPct - result.secondPct;
         // California exception
         if (result.winnerParty === 'Democratic' && result.secondParty === 'Democratic') {
-          marginOfVictory = 40;
+          marginOfVictory = 35;
         }
       } else if (result.winnerParty === 'Republican') {
         marginOfVictory = (result.winnerPct - result.secondPct) * -1;
@@ -174,11 +174,11 @@ export const transformColorsToPresidentialComparison =
       const presidential = presidentialResults.find(obj => obj.state === stateFull) || {};
       const presidentialMargin = (presidential.demPct * 100) - (presidential.repPct * 100);
       let senatePresDiff = marginOfVictory - presidentialMargin;
-      if (senatePresDiff >= 40) {
-        senatePresDiff = 40
+      if (senatePresDiff >= 35) {
+        senatePresDiff = 35
       }
-      if (senatePresDiff <= -40) {
-        senatePresDiff = -40;
+      if (senatePresDiff <= -35) {
+        senatePresDiff = -35;
       }
       let hue;
       let light;
@@ -207,7 +207,17 @@ export const parsePresidentialResultsToSenateFormat = (presidentialResults, stat
   } else if (presidentialYear === '2012') {
     demCandidate = 'Barack Obama';
     repCandidate = 'Mitt Romney';
+  } else if (presidentialYear === '2008') {
+    demCandidate = 'Barack Obama';
+    repCandidate = 'John McCain';
+  } else if (presidentialYear === '2004') {
+    demCandidate = 'John Kerry';
+    repCandidate = 'George W. Bush';
+  } else if (presidentialYear === '2000') {
+    demCandidate = 'Al Gore';
+    repCandidate = 'George W. Bush';
   }
+
   //winnerName, winnerParty, winnerPct, secondName, secondParty, secondPct
   const returnValues = {};
   presidentialResults.forEach(result => {

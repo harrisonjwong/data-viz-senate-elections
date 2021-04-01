@@ -44,7 +44,7 @@ const SenateElection = ({states}) => {
             currState &&
             <div>
               <h1>{states[currState] || states[currState.substring(0, 2)] + ' special'}</h1>
-              {!results[currState] && <h5>No regularly scheduled senate election</h5>}
+              {!results[currState] && <h5>No scheduled Senate election</h5>}
               {
                 results[currState] &&
                 <RaceResultTable currState={currState} results={results}/>

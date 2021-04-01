@@ -51,6 +51,9 @@ const SenateToPresidential = ({states}) => {
               <option value={2020}>2020 (Biden vs. Trump)</option>
               <option value={2016}>2016 (Clinton vs. Trump)</option>
               <option value={2012}>2012 (Obama vs. Romney)</option>
+              <option value={2008}>2008 (Obama vs. McCain)</option>
+              <option value={2004}>2004 (Kerry vs. Bush)</option>
+              <option value={2000}>2000 (Gore vs. Bush)</option>
             </select>
           </div>
           <h5>Key</h5>
@@ -78,7 +81,7 @@ const SenateToPresidential = ({states}) => {
             currState &&
             <div>
               <h1>{states[currState] || states[currState.substring(0, 2)] + ' special'}</h1>
-              {!results[currState] && <h5>No regularly scheduled Senate election</h5>}
+              {!results[currState] && <h5>No scheduled Senate election</h5>}
               {
                 results[currState] &&
                 <div>

@@ -13,6 +13,11 @@ const YearPicker = ({setYear}) => {
         <option value={2013}>2013 (special)</option>
         <option value={2012}>2012 (Class 1)</option>
         <option value={2010}>2010 (Class 3)</option>
+        <option value={2008}>2008 (Class 2)</option>
+        <option value={2006}>2006 (Class 1)</option>
+        <option value={2004}>2004 (Class 3)</option>
+        <option value={2002}>2002 (Class 2)</option>
+        <option value={2000}>2000 (Class 1)</option>
       </select>
     </div>
   )
