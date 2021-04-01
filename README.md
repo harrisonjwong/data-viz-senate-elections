@@ -31,11 +31,19 @@ Wikipedia for Senate election results:
 * [2014](https://en.wikipedia.org/wiki/2014_United_States_Senate_elections)
 * [2012](https://en.wikipedia.org/wiki/2012_United_States_Senate_elections)
 * [2010](https://en.wikipedia.org/wiki/2010_United_States_Senate_elections)
+* [2008](https://en.wikipedia.org/wiki/2008_United_States_Senate_elections)
+* [2006](https://en.wikipedia.org/wiki/2006_United_States_Senate_elections)
+* [2004](https://en.wikipedia.org/wiki/2004_United_States_Senate_elections)
+* [2002](https://en.wikipedia.org/wiki/2002_United_States_Senate_elections)
+* [2000](https://en.wikipedia.org/wiki/2000_United_States_Senate_elections)
 
 Wikipedia for Presidential election results:
 
 * [2020](https://en.wikipedia.org/wiki/2020_United_States_presidential_election)
 * [2016](https://en.wikipedia.org/wiki/2016_United_States_presidential_election)
 * [2012](https://en.wikipedia.org/wiki/2012_United_States_presidential_election)
+* [2008](https://en.wikipedia.org/wiki/2008_United_States_presidential_election)
+* [2004](https://en.wikipedia.org/wiki/2004_United_States_presidential_election)
+* [2000](https://en.wikipedia.org/wiki/2000_United_States_presidential_election)
 
 `\[[0-9]+\]`
