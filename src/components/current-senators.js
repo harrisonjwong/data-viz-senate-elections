@@ -38,6 +38,9 @@ const CurrentSenators = ({states}) => {
             <div style={{fontStyle: 'italic', fontSize: 'small'}}>Note: Angus King (I-ME) and Bernie Sanders (I-VT) are independents caucusing with the Democrats.</div>
           </div>
           {
+            !currState && <h2>Click on a state to see more information.</h2>
+          }
+          {
             currState &&
             <div>
               <h2>{states[currState]}</h2>

@@ -41,6 +41,9 @@ const SenateElection = ({states}) => {
           <div className='p-1' style={{color: 'white', backgroundColor: 'lightcoral'}}>Republican hold</div>
           <div className='p-1' style={{color: 'white', backgroundColor: 'lightskyblue'}}>Democratic hold</div>
           {
+            !currState && <h2>Click on a state to see more information.</h2>
+          }
+          {
             currState &&
             <div>
               <h1>{states[currState] || states[currState.substring(0, 2)] + ' special'}</h1>

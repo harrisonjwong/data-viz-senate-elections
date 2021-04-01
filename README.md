@@ -46,4 +46,26 @@ Wikipedia for Presidential election results:
 * [2004](https://en.wikipedia.org/wiki/2004_United_States_presidential_election)
 * [2000](https://en.wikipedia.org/wiki/2000_United_States_presidential_election)
 
+### Screenshots
+
+#### Current Senators Map
+
+![current senators](./screenshots/current-senators.png)
+
+#### Election History Map
+
+![election history](./screenshots/election-history.png)
+
+#### Margin of Victory Map
+
+![margin of victory](./screenshots/margin-of-victory.png)
+
+#### Presidential Comparison Map
+
+![presidential comparison](./screenshots/presidential-comparison.png)
+
+#### Homepage
+
+![homepage](./screenshots/homepage.png)
+
 `\[[0-9]+\]`

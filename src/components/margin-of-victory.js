@@ -64,6 +64,9 @@ const MarginOfVictory = ({states}) => {
           </div>
           <br/>
           {
+            !currState && <h2>Click on a state to see more information.</h2>
+          }
+          {
             currState &&
             <div>
               <h1>{states[currState] || states[currState.substring(0, 2)] + ' special'}</h1>
