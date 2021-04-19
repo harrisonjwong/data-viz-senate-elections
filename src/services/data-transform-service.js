@@ -169,6 +169,10 @@ export const transformColorsToPresidentialComparison =
         }
       } else if (result.winnerParty === 'Republican') {
         marginOfVictory = (result.winnerPct - result.secondPct) * -1;
+        // Lisa Murkowski exception
+        if (result.winnerParty === 'Republican' && result.secondParty === 'Republican') {
+          marginOfVictory = -35;
+        }
       }
       //fix for crash on hard reload?
       const presidential = presidentialResults.find(obj => obj.state === stateFull) || {};
