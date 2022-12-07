@@ -9,6 +9,11 @@ This is my final project for EECE 5642 in Spring 2021.
 3. Do `npm start`
 4. The app should open at `localhost:3000`
 
+Should this not work, please use Node 16 and try again. (I think the cause of this is that the library for react-usa-map is no longer updated.) 
+
+* `brew install nvm`
+* `nvm use 16`
+
 ### Technologies used
 
 Language: JavaScript
@@ -25,6 +30,7 @@ https://theunitedstates.io/ for the current members of Congress
 
 Wikipedia for Senate election results:
 
+* [2022](https://en.wikipedia.org/wiki/2022_United_States_Senate_elections)
 * [2020](https://en.wikipedia.org/wiki/2020_United_States_Senate_elections)
 * [2018](https://en.wikipedia.org/wiki/2018_United_States_Senate_elections)
 * [2016](https://en.wikipedia.org/wiki/2016_United_States_Senate_elections)
@@ -63,6 +69,7 @@ Wikipedia for Presidential election results:
 #### Presidential Comparison Map
 
 ![presidential comparison](./screenshots/presidential-comparison.png)
+![presidential comparison](./screenshots/presidential-comparison-2.png)
 
 #### Homepage
 

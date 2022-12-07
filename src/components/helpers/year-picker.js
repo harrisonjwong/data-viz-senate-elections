@@ -5,6 +5,7 @@ const YearPicker = ({setYear}) => {
     <div>
       <h5>Select Senate elections</h5>
       <select className='form-control' onChange={e => setYear(e.target.value)}>
+        <option value={2022}>2022 (Class 3)</option>
         <option value={2020}>2020 (Class 2)</option>
         <option value={2018}>2018 (Class 1)</option>
         <option value={2017}>2017 (special)</option>

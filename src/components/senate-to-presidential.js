@@ -17,7 +17,7 @@ const SenateToPresidential = ({states}) => {
   }
   const [results, setResults] = useState({});
   const [currState, setCurrState] = useState('');
-  const [year, setYear] = useState(2020);
+  const [year, setYear] = useState(2022);
   const [presidentialYear, setPresidentialYear] = useState('2020');
   const [presidentialResults, setPresidentialResults] = useState({});
 
